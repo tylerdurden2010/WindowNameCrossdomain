@@ -1,0 +1,51 @@
+
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" >
+    <head>
+        <title>......</title>
+        <script type="text/javascript">
+        function domainData(url, fn)
+        {
+            var isFirst = true;
+            var iframe = document.createElement('iframe');
+     <!--       iframe.style.display = 'none';  -->
+            var loadfn = function(){
+                if(isFirst){
+                    iframe.contentWindow.location = 'http://192.168.21.140/null.html';
+                    isFirst = false;
+                }
+                else {
+                        console.log(iframe.contentWindow.name);
+                    fn(iframe.contentWindow.name);
+        /*              console.log(iframe.contentWindow);
+                    iframe.contentWindow.document.write('');
+                        console.log(iframe.contentWindow);
+                    iframe.contentWindow.close();
+                    document.body.removeChild(iframe);
+                    iframe.src = '';
+                    iframe = null;  */
+                }
+            };
+            iframe.src = url;
+                console.log(iframe.attachEvent);
+            if(iframe.attachEvent){
+                console.log('recodeA');
+                iframe.attachEvent('onload', loadfn);
+            } else {
+                console.log('recode');
+                iframe.onload = loadfn;
+            }
+              console.log(iframe);
+            document.body.appendChild(iframe);
+        }
+        </script>
+    </head>
+    <body>
+
+    </body>
+        <script type="text/javascript">
+        domainData('http://192.168.21.209/data.html', function(data){
+            alert(data);
+        });
+        </script>
+    </html>
